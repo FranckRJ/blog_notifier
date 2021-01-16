@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 python-telegram-bot = "13.0"
 beautifulsoup4 = "4.9.3"
+requests = "2.25.0"
 
 [requires]
 python_version = "3.7"

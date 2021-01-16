@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 import telegram as tm
-import urllib.request as request
+import requests
 import configparser
 import bs4
 import logging
@@ -70,9 +70,8 @@ class PersoNotifBot:
 
     def _get_last_article_link(self, blog: BlogInfo):
         try:
-            req = request.Request(blog.main_url, headers={"User-Agent": PersoNotifBot.USER_AGENT})
-            page = request.urlopen(req)
-            soup = bs4.BeautifulSoup(page, features="html.parser")
+            response = requests.get(blog.main_url, headers={"User-Agent": PersoNotifBot.USER_AGENT})
+            soup = bs4.BeautifulSoup(response.content, features="html.parser")
             return self._execute_parse_logic(blog.parse_logics, soup)
         except Exception as err:
             self.logger.error(f"Impossible to retrieve latest comic of {blog.name} : {err}")
