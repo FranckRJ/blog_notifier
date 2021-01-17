@@ -108,11 +108,11 @@ class PersoNotifBot:
 
 def main():
     config = configparser.ConfigParser()
-    config.read("config.cfg")
+    config.read(["config.cfg", "private.config.cfg"])
 
-    chat_id = config.get("DEFAULT", "ChatId")
-    bot_token = config.get("DEFAULT", "BotToken")
-    database = config.get("DEFAULT", "Database")
+    chat_id = config.get("CONF", "ChatId")
+    bot_token = config.get("CONF", "BotToken")
+    database = config.get("CONF", "Database")
 
     perso_notif_bot = PersoNotifBot(chat_id, bot_token, database)
     perso_notif_bot.send_perso_notif()
